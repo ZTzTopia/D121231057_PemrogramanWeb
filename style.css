@@ -8,6 +8,10 @@ body {
     color: rgb(206, 205, 195);
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
 p {
     font-size: 0.75rem;
 }
