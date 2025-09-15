@@ -1,19 +1,25 @@
 :root {
     --spacing: 0.25rem;
+
+    --back: rgb(16, 15, 15);
+    --back-2: rgb(28, 27, 26);
+    --tx: rgb(206, 205, 195);
+    --tx-2: rgb(135, 133, 128);
+    --ui: rgb(40, 39, 38);
 }
 
 body {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: rgb(16, 15, 15);
-    color: rgb(206, 205, 195);
+    background-color: var(--back);
+    color: var(--tx);
+}
+
+p {
+    font-size: 0.875rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
-}
-
-p {
-    font-size: 0.75rem;
 }
 
 .container {
@@ -24,10 +30,53 @@ p {
 .chip {
     display: inline-block;
     padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 2.5);
-    background-color: rgb(28, 27, 26);
+    background-color: var(--back-2);
     border-radius: 0.25rem;
 }
 
 .rounded {
     border-radius: 0.25rem;
+}
+
+.card {
+    background-color: var(--back-2);
+    border-radius: 0.25rem;
+    padding: calc(var(--spacing) * 4);
+    border: var(--ui) solid 1px;
+
+    p {
+        margin: 0;
+    }
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-2 {
+    gap: calc(var(--spacing) * 2);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.tx-color-muted {
+    color: var(--tx-2);
 }
