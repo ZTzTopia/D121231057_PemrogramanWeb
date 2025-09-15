@@ -1,7 +1,15 @@
+:root {
+    --spacing: 0.25rem;
+}
+
 body {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     background-color: rgb(16, 15, 15);
     color: rgb(206, 205, 195);
+}
+
+p {
+    font-size: 0.75rem;
 }
 
 .container {
@@ -9,3 +17,13 @@ body {
     max-width: 50vw;
 }
 
+.chip {
+    display: inline-block;
+    padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 2.5);
+    background-color: rgb(28, 27, 26);
+    border-radius: 0.25rem;
+}
+
+.rounded {
+    border-radius: 0.25rem;
+}
