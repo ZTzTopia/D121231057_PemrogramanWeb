@@ -1,11 +1,17 @@
 :root {
     --spacing: 0.25rem;
 
+    /* Color theme based on Flexoki (https://stephango.com/flexoki) */
     --back: rgb(16, 15, 15);
     --back-2: rgb(28, 27, 26);
     --tx: rgb(206, 205, 195);
+    --tx-inverse: rgb(16, 15, 15);
     --tx-2: rgb(135, 133, 128);
     --ui: rgb(40, 39, 38);
+
+    --gr: rgb(135, 154, 57);
+    --bl: rgb(67, 133, 190);
+    --ma: rgb(206, 93, 151);
 }
 
 body {
@@ -79,4 +85,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .tx-color-muted {
     color: var(--tx-2);
+}
+
+.tx-color-inverse {
+    color: var(--tx-inverse);
+}
+
+.bg-color-gr {
+    background-color: var(--gr);
+}
+
+.bg-color-bl {
+    background-color: var(--bl);
+}
+
+.bg-color-ma {
+    background-color: var(--ma);
+}
+
+.text-xs {
+    font-size: 0.75rem;
 }
