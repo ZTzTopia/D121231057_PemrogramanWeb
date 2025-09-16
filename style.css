@@ -37,6 +37,7 @@ a {
 .container {
     margin: auto;
     max-width: 48rem;
+    padding: 0px calc(var(--spacing) * 4);
 }
 
 .chip {
