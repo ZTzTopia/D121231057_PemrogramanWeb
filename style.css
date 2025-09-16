@@ -86,6 +86,10 @@ a {
     flex-direction: row;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .font-medium {
     font-weight: 500;
 }
@@ -147,5 +151,17 @@ nav a {
     &.active {
         background-color: var(--ui);
         color: var(--tx);
+    }
+}
+
+.project-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--spacing) * 2);
+}
+
+@media screen and (max-width: 640px) {
+    .project-section {
+        grid-template-columns: 1fr;
     }
 }
