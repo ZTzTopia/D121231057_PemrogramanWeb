@@ -1,5 +1,10 @@
 import "./Card.css";
 
-export default function Card({ children, className = "" }) {
-  return <div className={`card ${className}`}>{children}</div>;
+export default function Card({ children, className = "", href, ...props }) {
+  const Component = href ? "a" : "span";
+  return (
+    <Component className={`card ${className}`} href={href} {...props}>
+      {children}
+    </Component>
+  );
 }
