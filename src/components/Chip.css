@@ -1,0 +1,6 @@
+.chip {
+  display: inline-block;
+  padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 2.5);
+  background-color: var(--back-2);
+  border-radius: 0.25rem;
+}

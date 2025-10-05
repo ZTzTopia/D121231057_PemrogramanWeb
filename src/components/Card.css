@@ -1,0 +1,10 @@
+.card {
+  background-color: var(--back-2);
+  border-radius: 0.25rem;
+  padding: calc(var(--spacing) * 4);
+  border: var(--ui) solid 1px;
+
+  p {
+    margin: 0;
+  }
+}

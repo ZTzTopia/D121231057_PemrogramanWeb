@@ -1,0 +1,40 @@
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  border-bottom: var(--ui) dashed 1px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  nav {
+    align-items: center;
+    padding: calc(var(--spacing) * 3) 0;
+  }
+
+  nav a {
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+    border-radius: 0.25rem;
+    color: var(--tx-2);
+    font-weight: 500;
+    font-size: 0.875rem;
+
+    &:hover {
+      background-color: var(--ui);
+    }
+
+    &.active {
+      background-color: var(--ui);
+      color: var(--tx);
+    }
+  }
+}
+
+.logo {
+  color: var(--cy);
+  font-weight: 500;
+}
