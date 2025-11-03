@@ -1,4 +1,8 @@
-import { loadTasks, saveTasks, addTask, getTasks, markTaskAsDone, removeTask } from './tasks';
+const { loadTasks, saveTasks, addTask, getTasks, markTaskAsDone, removeTask } = require('./tasks');
+
+if (process.argv.length < 3) {
+    console.log('node index.js <command> [arguments]');
+}
 
 const args = process.argv.slice(2);
 
