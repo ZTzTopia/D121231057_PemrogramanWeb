@@ -1,182 +1,185 @@
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bagaimana Cara Web Bekerja?</title>
-        <link rel="stylesheet" href="styles.css" />
-        <style>
-            body {
-                font-family: "Segoe UI", Arial, sans-serif;
-                background: rgb(16, 15, 15);
-                color: rgb(206, 205, 195);
-                margin: 0;
-                padding: 0;
-                min-height: 100vh;
-                text-align: center;
-            }
 
-            h1 {
-                background: rgb(28, 27, 26);
-                color: rgb(206, 205, 195);
-                padding: 1em 0;
-                margin: 0 0 1em 0;
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bagaimana Cara Web Bekerja?</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: rgb(16, 15, 15);
+            color: rgb(206, 205, 195);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            text-align: center;
+        }
 
-            #container {
-                background: rgb(28, 27, 26);
-                max-width: 800px;
-                margin: auto;
-                border-radius: 10px;
-                padding: 2em;
-            }
+        h1 {
+            background: rgb(28, 27, 26);
+            color: rgb(206, 205, 195);
+            padding: 1em 0;
+            margin: 0 0 1em 0;
+        }
 
-            #tit {
-                font-size: 1.7em;
-                font-weight: 700;
-                color: rgb(58, 169, 159);
-                margin-bottom: 0.5em;
-            }
+        #container {
+            background: rgb(28, 27, 26);
+            max-width: 800px;
+            margin: auto;
+            border-radius: 10px;
+            padding: 2em;
+        }
 
-            #lol {
-                text-align: left;
-                font-size: 1.05em;
-                line-height: 1.6;
-                margin: 1em 0;
-            }
+        #tit {
+            font-size: 1.7em;
+            font-weight: 700;
+            color: rgb(58, 169, 159);
+            margin-bottom: 0.5em;
+        }
 
-            #ref {
-                font-size: 0.9em;
-                text-align: left;
-            }
+        #lol {
+            text-align: left;
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin: 1em 0;
+        }
 
-            #ref a {
-                color: rgb(58, 169, 159);
-                text-decoration: none;
-            }
+        #ref {
+            font-size: 0.9em;
+            text-align: left;
+        }
 
-            #ref a:hover {
-                text-decoration: underline;
-            }
+        #ref a {
+            color: rgb(58, 169, 159);
+            text-decoration: none;
+        }
 
-            button {
-                background-color: rgb(58, 169, 159);
-                color: white;
-                border: none;
-                padding: 0.7em 1.4em;
-                margin: 1em 0.5em;
-                border-radius: 6px;
-                font-size: 1em;
-                cursor: pointer;
-            }
+        #ref a:hover {
+            text-decoration: underline;
+        }
 
-            button:hover {
-                background-color: rgb(36, 131, 123);
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Bagaimana Cara Web Bekerja?</h1>
-        <div id="container">
-            <p id="tit"></p>
-            <p id="lol"></p>
-            <p id="ref">Referensi</p>
-            <button id="prev">Sebelumnya</button>
-            <button id="next">Selanjutnya</button>
-        </div>
+        button {
+            background-color: rgb(58, 169, 159);
+            color: white;
+            border: none;
+            padding: 0.7em 1.4em;
+            margin: 1em 0.5em;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
 
-        <script>
-            const YYYYYYYYY = [
-                {
-                    title: "Cara Kerja Internet Secara Umum",
-                    description: `
+        button:hover {
+            background-color: rgb(36, 131, 123);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bagaimana Cara Web Bekerja?</h1>
+    <div id="container">
+        <p id="tit"></p>
+        <p id="lol"></p>
+        <p id="ref">Referensi</p>
+        <button id="prev">Sebelumnya</button>
+        <button id="next">Selanjutnya</button>
+    </div>
+
+    <script>
+        const YYYYYYYYY = [
+            {
+                title: "Cara Kerja Internet Secara Umum",
+                description: `
         Internet adalah jaringan global yang menghubungkan jutaan komputer.
         Saat kamu membuka situs, browser mengirim permintaan (request) melalui jaringan ke server tempat situs itu disimpan.
         Server kemudian membalas dengan mengirimkan file yang diminta (HTML, CSS, gambar, dll), dan browser menampilkannya di layar.
         Semua komunikasi ini berjalan lewat protokol yang terstandar, seperti TCP/IP.`,
-                    reference:
-                        "https://www.cloudflare.com/learning/network-layer/how-does-the-internet-work/",
-                },
-                {
-                    title: "HTTP dan HTTPS",
-                    description: `
+                reference:
+                    "https://www.cloudflare.com/learning/network-layer/how-does-the-internet-work/",
+            },
+            {
+                title: "HTTP dan HTTPS",
+                description: `
         HTTP (HyperText Transfer Protocol) adalah aturan komunikasi antara klien (browser) dan server web.
         Saat kamu membuka halaman, browser mengirim permintaan HTTP ke server. Server membalas dengan file web.
         HTTPS adalah versi aman yang menggunakan enkripsi TLS/SSL agar data tidak bisa disadap oleh pihak ketiga.`,
-                    reference:
-                        "https://developer.mozilla.org/id/docs/Web/HTTP/Overview",
-                },
-                {
-                    title: "Nama Domain",
-                    description: `
+                reference:
+                    "https://developer.mozilla.org/id/docs/Web/HTTP/Overview",
+            },
+            {
+                title: "Nama Domain",
+                description: `
         Nama domain adalah alamat mudah diingat untuk mengakses situs web, seperti google.com atau univ.ac.id.
         Komputer sebenarnya berkomunikasi menggunakan alamat IP (misalnya 142.250.4.78).
         Nama domain hanyalah pengganti agar manusia tidak perlu mengingat angka IP.`,
-                    reference:
-                        "https://www.cloudflare.com/learning/dns/glossary/what-is-a-domain-name/",
-                },
-                {
-                    title: "Hosting",
-                    description: `
+                reference:
+                    "https://www.cloudflare.com/learning/dns/glossary/what-is-a-domain-name/",
+            },
+            {
+                title: "Hosting",
+                description: `
         Hosting adalah layanan penyimpanan untuk file situs web agar bisa diakses dari mana saja.
         Server hosting menjalankan perangkat lunak (misalnya Apache, Nginx) yang melayani permintaan dari pengguna.
-        Tanpa hosting, situsmu cuma file di laptop—tidak bisa diakses publik.`,
-                    reference:
-                        "https://www.hostinger.co.id/tutorial/apa-itu-web-hosting",
-                },
-                {
-                    title: "DNS (Domain Name System)",
-                    description: `
+        Tanpa hosting, situsmu cuma file di laptop tidak bisa diakses publik.`,
+                reference:
+                    "https://www.hostinger.co.id/tutorial/apa-itu-web-hosting",
+            },
+            {
+                title: "DNS (Domain Name System)",
+                description: `
         DNS adalah sistem yang menerjemahkan nama domain menjadi alamat IP.
         Ketika kamu mengetikkan www.contoh.com, komputer akan bertanya ke server DNS: “IP-nya berapa?”
         Server DNS menjawab dengan IP tujuan, lalu browser bisa terhubung ke server yang benar.`,
-                    reference:
-                        "https://www.cloudflare.com/learning/dns/what-is-dns/",
-                },
-                {
-                    title: "Browser",
-                    description: `
+                reference:
+                    "https://www.cloudflare.com/learning/dns/what-is-dns/",
+            },
+            {
+                title: "Browser",
+                description: `
         Browser adalah aplikasi yang menampilkan isi situs web.
         Ia mengambil file HTML, CSS, dan JavaScript dari server, kemudian memproses dan menampilkannya secara visual.
         Contoh browser: Chrome, Firefox, Safari, Edge.`,
-                    reference:
-                        "https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/",
-                },
-            ];
+                reference:
+                    "https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/",
+            },
+        ];
 
-            let index =
-                parseInt(localStorage.getItem("howInternetWorksIndex")) || 0;
+        let index =
+            parseInt(localStorage.getItem("howInternetWorksIndex")) || 0;
 
-            const titleElement = document.getElementById("tit");
-            const descriptionElement = document.getElementById("lol");
-            const referenceElement = document.getElementById("ref");
+        const titleElement = document.getElementById("tit");
+        const descriptionElement = document.getElementById("lol");
+        const referenceElement = document.getElementById("ref");
 
-            const prev = document.getElementById("prev");
-            const next = document.getElementById("next");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
 
-            function updateContent() {
-                const item = YYYYYYYYY[index];
-                titleElement.innerText = item.title;
-                descriptionElement.innerText = item.description;
-                referenceElement.innerHTML = `<strong>Referensi:</strong> <a href="${item.reference}" target="_blank">${item.reference}</a>`;
-                localStorage.setItem("howInternetWorksIndex", index);
+        function updateContent() {
+            const item = YYYYYYYYY[index];
+            titleElement.innerText = item.title;
+            descriptionElement.innerText = item.description;
+            referenceElement.innerHTML = `<strong>Referensi:</strong> <a href="${item.reference}" target="_blank">${item.reference}</a>`;
+            localStorage.setItem("howInternetWorksIndex", index);
+        }
+
+        updateContent();
+
+        prev.addEventListener("click", () => {
+            if (index > 0) {
+                index--;
+                updateContent();
             }
+        });
 
-            updateContent();
+        next.addEventListener("click", () => {
+            if (index < YYYYYYYYY.length - 1) {
+                index++;
+                updateContent();
+            }
+        });
+    </script>
+</body>
 
-            prev.addEventListener("click", () => {
-                if (index > 0) {
-                    index--;
-                    updateContent();
-                }
-            });
-
-            next.addEventListener("click", () => {
-                if (index < YYYYYYYYY.length - 1) {
-                    index++;
-                    updateContent();
-                }
-            });
-        </script>
-    </body>
 </html>
