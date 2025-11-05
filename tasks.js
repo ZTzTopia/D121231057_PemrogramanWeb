@@ -10,15 +10,25 @@ const loadTasks = () => {
 
     const data = fs.readFileSync(tasksFilePath, 'utf-8');
     tasks.push(...JSON.parse(data));
+    tasks.sort((a, b) => a.id - b.id);
 }
 
 const saveTasks = () => {
     fs.writeFileSync(tasksFilePath, JSON.stringify(tasks, null, 2));
 }
 
+const findFreeId = () => {
+    let id = 1;
+    while (tasks.some(t => t.id === id)) {
+        id++;
+    }
+
+    return id;
+}
+
 const addTask = (title) => {
     const newTask = {
-        id: tasks.length + 1,
+        id: findFreeId(),
         title,
         completed: false
     };
