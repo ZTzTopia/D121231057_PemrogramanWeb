@@ -1,0 +1,26 @@
+###
+GET http://127.0.0.1:3000/api/books/
+
+###
+POST http://127.0.0.1:3000/api/books/
+Content-Type: application/json
+
+{
+    "title": "A Game of Thrones",
+    "author": "George R.R. Martin"
+}
+
+###
+GET http://127.0.0.1:3000/api/books/1
+
+###
+PUT http://127.0.0.1:3000/api/books/1
+Content-Type: application/json
+
+{
+    "title": "Harry Potter and the Chamber of Secrets",
+    "author": "J.K. Rowling"
+}
+
+###
+DELETE http://127.0.0.1:3000/api/books/1
