@@ -31,7 +31,8 @@ router.post('/', validateBook, (req, res) => {
   const newBook = { 
     id: idCounter++, 
     title: title,
-    author: author
+    author: author,
+    cover: '/images/600x400.png'
   };
   books.push(newBook);
   res.status(201).json(newBook);
@@ -55,7 +56,8 @@ router.put('/:id', validateBook, (req, res) => {
   books[bookIndex] = { 
     id: bookId,
     title: title,
-    author: author
+    author: author,
+    cover: '/images/600x400.png'
   };
   res.json(books[bookIndex]);
 });

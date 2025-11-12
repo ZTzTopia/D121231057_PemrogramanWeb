@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
-app.use('/images', express.static(path.join(__dirname, 'public/images')));
+app.use('/images', express.static(path.join(__dirname, 'static/images')));
 app.use('/api/books', booksRouter);
 
 app.use((err, req, res, next) => {
