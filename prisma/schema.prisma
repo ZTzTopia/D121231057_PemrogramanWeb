@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
@@ -40,15 +40,15 @@ model Product {
 }
 
 model SubscriptionPlan {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   price       Float
   productId   Int
-  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
   subscribers Subscription[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 model Subscription {

@@ -1,0 +1,38 @@
+@baseUrl = http://localhost:3001/api/auth
+
+### Register User
+# @name register
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "Password123!",
+    "name": "Test User"
+}
+
+### Login User
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "Password123!"
+}
+
+### Refresh Token
+@refreshToken = {{login.response.body.refreshToken}}
+
+POST {{baseUrl}}/refresh
+Content-Type: application/json
+
+{
+    "refreshToken": "{{refreshToken}}"
+}
+
+### Get Current User Profile
+@accessToken = {{login.response.body.accessToken}}
+
+GET {{baseUrl}}/me
+Authorization: Bearer {{accessToken}}
