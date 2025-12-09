@@ -1,8 +1,9 @@
 const prisma = require('../config/database');
 const { hashPassword, comparePassword, generateAccessToken, generateRefreshToken, verifyToken } = require('../utils/auth.utils');
 const { registerSchema, loginSchema } = require('../validators/auth.validator');
+const AppError = require('../utils/AppError');
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
     try {
         const validatedData = registerSchema.parse(req.body);
 
@@ -32,14 +33,11 @@ exports.register = async (req, res) => {
             user: userWithoutPassword,
         });
     } catch (error) {
-        if (error.name === 'ZodError') {
-            return res.status(400).json({ errors: error.errors });
-        }
-        res.status(500).json({ message: 'Something went wrong', error: error.message });
+        next(error);
     }
 };
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
     try {
         const validatedData = loginSchema.parse(req.body);
 
@@ -48,13 +46,13 @@ exports.login = async (req, res) => {
         });
 
         if (!user) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            throw new AppError('Invalid credentials', 401);
         }
 
         const isPasswordValid = await comparePassword(validatedData.password, user.password);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            throw new AppError('Invalid credentials', 401);
         }
 
         const accessToken = generateAccessToken(user);
@@ -66,26 +64,28 @@ exports.login = async (req, res) => {
             refreshToken,
         });
     } catch (error) {
-        if (error.name === 'ZodError') {
-            return res.status(400).json({ errors: error.errors });
-        }
-        res.status(500).json({ message: 'Something went wrong', error: error.message });
+        next(error);
     }
 };
 
-exports.refresh = async (req, res) => {
-    const { refreshToken } = req.body;
-
-    if (!refreshToken) {
-        return res.status(400).json({ message: 'Refresh token is required' });
-    }
-
+exports.refresh = async (req, res, next) => {
     try {
-        const decoded = verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET);
+        const { refreshToken } = req.body;
+
+        if (!refreshToken) {
+            throw new AppError('Refresh token is required', 400);
+        }
+
+        let decoded;
+        try {
+            decoded = verifyToken(refreshToken, process.env.JWT_REFRESH_SECRET);
+        } catch (err) {
+            throw new AppError('Invalid or expired refresh token', 401);
+        }
 
         const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
         if (!user) {
-            return res.status(401).json({ message: 'User not found' });
+            throw new AppError('User not found', 401);
         }
 
         const accessToken = generateAccessToken(user);
@@ -94,24 +94,24 @@ exports.refresh = async (req, res) => {
             accessToken,
         });
     } catch (error) {
-        return res.status(401).json({ message: 'Invalid or expired refresh token' });
+        next(error);
     }
 };
 
-exports.me = async (req, res) => {
+exports.me = async (req, res, next) => {
     try {
         const user = await prisma.user.findUnique({
             where: { id: req.user.userId },
         });
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            throw new AppError('User not found', 404);
         }
 
         const { password, ...userWithoutPassword } = user;
 
         res.status(200).json({ user: userWithoutPassword });
     } catch (error) {
-        res.status(500).json({ message: 'Something went wrong', error: error.message });
+        next(error);
     }
 };
