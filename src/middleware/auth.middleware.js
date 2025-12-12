@@ -1,10 +1,11 @@
 const { verifyToken } = require('../utils/auth.utils');
+const AppError = require('../utils/AppError');
 
 const authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'Authentication required' });
+        return next(new AppError('Authentication required. Please provide a Bearer token.', 401));
     }
 
     const token = authHeader.split(' ')[1];
@@ -14,10 +15,7 @@ const authMiddleware = async (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        if (error.name === 'TokenExpiredError') {
-            return res.status(401).json({ message: 'Token expired' });
-        }
-        return res.status(403).json({ message: 'Invalid token' });
+        next(error);
     }
 };
 

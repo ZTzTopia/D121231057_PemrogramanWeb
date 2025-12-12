@@ -1,10 +1,8 @@
 const prisma = require('../config/database');
-const { createSchema, updateSchema } = require('../validators/product.validator');
 const AppError = require('../utils/AppError');
 
 exports.getAll = async (req, res, next) => {
     try {
-
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
@@ -78,10 +76,8 @@ exports.getOne = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
     try {
-        const validatedData = createSchema.parse(req.body);
-
         const product = await prisma.product.create({
-            data: { name: validatedData.name },
+            data: { name: req.body.name },
         });
 
         res.status(201).json({
@@ -97,7 +93,6 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     try {
         const id = parseInt(req.params.id);
-        const validatedData = updateSchema.parse(req.body);
 
         const existingProduct = await prisma.product.findUnique({ where: { id } });
         if (!existingProduct) {
@@ -106,7 +101,7 @@ exports.update = async (req, res, next) => {
 
         const product = await prisma.product.update({
             where: { id },
-            data: validatedData,
+            data: req.body,
         });
 
         res.status(200).json({

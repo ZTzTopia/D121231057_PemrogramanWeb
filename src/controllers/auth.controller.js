@@ -1,32 +1,31 @@
 const prisma = require('../config/database');
 const { hashPassword, comparePassword, generateAccessToken, generateRefreshToken, verifyToken } = require('../utils/auth.utils');
-const { registerSchema, loginSchema } = require('../validators/auth.validator');
 const AppError = require('../utils/AppError');
 
 exports.register = async (req, res, next) => {
     try {
-        const validatedData = registerSchema.parse(req.body);
+        const { email, password, name } = req.body;
 
         const existingUser = await prisma.user.findUnique({
-            where: { email: validatedData.email },
+            where: { email },
         });
 
         if (existingUser) {
             throw new AppError('User already exists', 400);
         }
 
-        const hashedPassword = await hashPassword(validatedData.password);
+        const hashedPassword = await hashPassword(password);
 
         const user = await prisma.user.create({
             data: {
-                email: validatedData.email,
+                email,
                 password: hashedPassword,
-                name: validatedData.name,
+                name,
                 role: 'USER',
             },
         });
 
-        const { password, ...userWithoutPassword } = user;
+        const { password: _, ...userWithoutPassword } = user;
 
         res.status(201).json({
             success: true,
@@ -40,17 +39,17 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
-        const validatedData = loginSchema.parse(req.body);
+        const { email, password } = req.body;
 
         const user = await prisma.user.findUnique({
-            where: { email: validatedData.email },
+            where: { email },
         });
 
         if (!user) {
             throw new AppError('Invalid credentials', 401);
         }
 
-        const isPasswordValid = await comparePassword(validatedData.password, user.password);
+        const isPasswordValid = await comparePassword(password, user.password);
 
         if (!isPasswordValid) {
             throw new AppError('Invalid credentials', 401);
@@ -70,13 +69,9 @@ exports.login = async (req, res, next) => {
     }
 };
 
-exports.refresh = async (req, res, next) => {
+exports.refreshToken = async (req, res, next) => {
     try {
         const { refreshToken } = req.body;
-
-        if (!refreshToken) {
-            throw new AppError('Refresh token is required', 400);
-        }
 
         let decoded;
         try {
