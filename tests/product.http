@@ -1,0 +1,57 @@
+@authUrl = http://localhost:3000/api/auth
+@baseUrl = http://localhost:3000/api/product
+
+### Login User
+# @name login
+POST {{authUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "Password123!"
+}
+
+### Create Product
+# @name createProduct
+POST {{baseUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+{
+    "name": "Test Product A"
+}
+
+### Get All Products (Default)
+GET {{baseUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Get All Products (Pagination & Sorting)
+GET {{baseUrl}}/?page=1&limit=5&sortBy=name&order=desc
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Search Products
+GET {{baseUrl}}/?search=Test
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Get One Product
+@productId = {{createProduct.response.body.data.id}}
+GET {{baseUrl}}/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Update Product
+PUT {{baseUrl}}/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+{
+    "name": "Updated Product Name"
+}
+
+### Delete Product
+DELETE {{baseUrl}}/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}

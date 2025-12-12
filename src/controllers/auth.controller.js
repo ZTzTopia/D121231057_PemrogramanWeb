@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
         });
 
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+            throw new AppError('User already exists', 400);
         }
 
         const hashedPassword = await hashPassword(validatedData.password);
@@ -29,6 +29,7 @@ exports.register = async (req, res, next) => {
         const { password, ...userWithoutPassword } = user;
 
         res.status(201).json({
+            success: true,
             message: 'User registered successfully',
             user: userWithoutPassword,
         });
@@ -59,6 +60,7 @@ exports.login = async (req, res, next) => {
         const refreshToken = generateRefreshToken(user);
 
         res.status(200).json({
+            success: true,
             message: 'Login successful',
             accessToken,
             refreshToken,
@@ -91,6 +93,7 @@ exports.refresh = async (req, res, next) => {
         const accessToken = generateAccessToken(user);
 
         res.status(200).json({
+            success: true,
             accessToken,
         });
     } catch (error) {
@@ -110,7 +113,10 @@ exports.me = async (req, res, next) => {
 
         const { password, ...userWithoutPassword } = user;
 
-        res.status(200).json({ user: userWithoutPassword });
+        res.status(200).json({
+            success: true,
+            user: userWithoutPassword
+        });
     } catch (error) {
         next(error);
     }
