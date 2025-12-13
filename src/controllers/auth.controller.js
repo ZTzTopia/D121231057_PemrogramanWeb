@@ -100,6 +100,7 @@ exports.me = async (req, res, next) => {
     try {
         const user = await prisma.user.findUnique({
             where: { id: req.user.userId },
+            include: { subscriptions: { include: { plan: { include: { product: true } } } } },
         });
 
         if (!user) {
