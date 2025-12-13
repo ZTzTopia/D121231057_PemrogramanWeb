@@ -1,4 +1,4 @@
-const AppError = require('../utils/AppError');
+const AppError = require('../utils/error.utils');
 const { ZodError } = require('zod');
 const { Prisma } = require('@prisma/client');
 

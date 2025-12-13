@@ -1,5 +1,5 @@
 const { verifyToken } = require('../utils/auth.utils');
-const AppError = require('../utils/AppError');
+const AppError = require('../utils/error.utils');
 
 const authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization;

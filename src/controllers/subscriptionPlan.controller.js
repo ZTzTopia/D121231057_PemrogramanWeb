@@ -1,17 +1,10 @@
 const prisma = require('../config/database');
-const AppError = require('../utils/AppError');
+const AppError = require('../utils/error.utils');
+const { parsePagination, formatPagination } = require('../utils/pagination.utils');
 
 exports.getAll = async (req, res, next) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
-        const skip = (page - 1) * limit;
-
-        const sortBy = req.query.sortBy || 'createdAt';
-        const order = req.query.order === 'desc' ? 'desc' : 'asc';
-
-        const { search, ...filters } = req.query;
-        ['page', 'limit', 'sortBy', 'order'].forEach(field => delete filters[field]);
+        const { page, limit, skip, sortBy, order, filters, search } = parsePagination(req.query);
 
         const where = { ...filters };
 
@@ -31,18 +24,13 @@ exports.getAll = async (req, res, next) => {
             prisma.subscriptionPlan.count({ where }),
         ]);
 
-        const totalPages = Math.ceil(total / limit);
+        const pagination = formatPagination(total, page, limit);
 
         res.status(200).json({
             success: true,
             message: 'Subscription plans retrieved successfully',
             data: plans,
-            pagination: {
-                totalDetails: total,
-                totalPages,
-                currentPage: page,
-                limit,
-            },
+            pagination,
         });
     } catch (error) {
         next(error);

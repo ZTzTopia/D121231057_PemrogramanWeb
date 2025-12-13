@@ -3,7 +3,7 @@ const authRouter = require('./routes/auth.routes');
 const productRouter = require('./routes/product.routes');
 const subscriptionPlanRouter = require('./routes/subscriptionPlan.routes');
 const subscriptionRouter = require('./routes/subscription.routes');
-const AppError = require('./utils/AppError');
+const AppError = require('./utils/error.utils');
 const loggerMiddleware = require('./middleware/logger.middleware');
 const errorHandler = require('./middleware/error.middleware');
 

@@ -1,6 +1,6 @@
 const prisma = require('../config/database');
 const { hashPassword, comparePassword, generateAccessToken, generateRefreshToken, verifyToken } = require('../utils/auth.utils');
-const AppError = require('../utils/AppError');
+const AppError = require('../utils/error.utils');
 
 exports.register = async (req, res, next) => {
     try {
