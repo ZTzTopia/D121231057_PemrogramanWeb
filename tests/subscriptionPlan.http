@@ -1,0 +1,57 @@
+@authUrl = http://localhost:3000/api/auth
+@baseUrl = http://localhost:3000/api/subscription-plan
+@productUrl = http://localhost:3000/api/product
+
+### Login User (seeded admin)
+# @name login
+POST {{authUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "AdminPass123!"
+}
+
+### Get Products (use existing seeded product)
+# @name getProducts
+GET {{productUrl}}/
+Authorization: Bearer {{login.response.body.accessToken}}
+
+@productId = {{getProducts.response.body.data[0].id}}
+
+### Create Subscription Plan
+# @name createPlan
+POST {{baseUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+{
+    "name": "Basic Plan",
+    "price": 9.99,
+    "productId": {{productId}}
+}
+
+### Get All Subscription Plans
+GET {{baseUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+@planId = {{createPlan.response.body.data.id}}
+
+### Get One Subscription Plan
+GET {{baseUrl}}/{{planId}}
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Update Subscription Plan
+PUT {{baseUrl}}/{{planId}}
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+{
+    "name": "Basic Plan Updated",
+    "price": 12.99
+}
+
+### Delete Subscription Plan
+DELETE {{baseUrl}}/{{planId}}
+Authorization: Bearer {{login.response.body.accessToken}}

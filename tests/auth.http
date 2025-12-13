@@ -1,24 +1,24 @@
 @baseUrl = http://localhost:3000/api/auth
 
-### Register User
+### Register User (new user, won't conflict with seeder)
 # @name register
 POST {{baseUrl}}/register
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
+    "email": "newtest@example.com",
     "password": "Password123!",
     "name": "Test User"
 }
 
-### Login User
+### Login User (use seeded admin)
 # @name login
 POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
-    "password": "Password123!"
+    "email": "admin@example.com",
+    "password": "AdminPass123!"
 }
 
 ### Refresh Token

@@ -8,7 +8,7 @@ const authRouter = express.Router();
 
 authRouter.post('/register', validate({ body: registerSchema }), authController.register);
 authRouter.post('/login', validate({ body: loginSchema }), authController.login);
-authRouter.post('/refresh', validate({ params: refreshTokenSchema }), authController.refreshToken);
+authRouter.post('/refresh', validate({ body: refreshTokenSchema }), authController.refreshToken);
 authRouter.get('/me', authMiddleware, authController.me);
 
 module.exports = authRouter;

@@ -1,14 +1,14 @@
 @authUrl = http://localhost:3000/api/auth
 @baseUrl = http://localhost:3000/api/product
 
-### Login User
+### Login User (seeded admin)
 # @name login
 POST {{authUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
-    "password": "Password123!"
+    "email": "admin@example.com",
+    "password": "AdminPass123!"
 }
 
 ### Create Product
@@ -23,23 +23,20 @@ Authorization: Bearer {{login.response.body.accessToken}}
 
 ### Get All Products (Default)
 GET {{baseUrl}}/
-Content-Type: application/json
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### Get All Products (Pagination & Sorting)
 GET {{baseUrl}}/?page=1&limit=5&sortBy=name&order=desc
-Content-Type: application/json
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### Search Products
 GET {{baseUrl}}/?search=Test
-Content-Type: application/json
 Authorization: Bearer {{login.response.body.accessToken}}
 
-### Get One Product
 @productId = {{createProduct.response.body.data.id}}
+
+### Get One Product
 GET {{baseUrl}}/{{productId}}
-Content-Type: application/json
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### Update Product
@@ -53,5 +50,4 @@ Authorization: Bearer {{login.response.body.accessToken}}
 
 ### Delete Product
 DELETE {{baseUrl}}/{{productId}}
-Content-Type: application/json
 Authorization: Bearer {{login.response.body.accessToken}}
