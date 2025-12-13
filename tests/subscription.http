@@ -1,0 +1,83 @@
+@authUrl = http://localhost:3000/api/auth
+@planUrl = http://localhost:3000/api/subscription-plan
+@subUrl = http://localhost:3000/api/subscription
+
+### Login Admin
+# @name loginAdmin
+POST {{authUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "AdminPass123!"
+}
+
+### Login User1
+# @name loginUser1
+POST {{authUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "UserPass123!"
+}
+
+### Get User1 Profile
+# @name getUser1Me
+GET {{authUrl}}/me
+Authorization: Bearer {{loginUser1.response.body.accessToken}}
+
+@userId = {{getUser1Me.response.body.user.id}}
+
+### Get Plans
+# @name getPlans
+GET {{planUrl}}/
+Authorization: Bearer {{loginAdmin.response.body.accessToken}}
+
+@planId = {{getPlans.response.body.data[0].id}}
+@planId2 = {{getPlans.response.body.data[1].id}}
+
+### Create Subscription as Admin for User1
+# @name createSubAdmin
+POST {{subUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{loginAdmin.response.body.accessToken}}
+
+{
+    "planId": {{planId}},
+    "userId": {{userId}}
+}
+
+### Get Created Subscription ID
+@subId = {{createSubAdmin.response.body.data.id}}
+
+### Get All Subscriptions (Admin)
+GET {{subUrl}}/
+Authorization: Bearer {{loginAdmin.response.body.accessToken}}
+
+### Get One Subscription
+GET {{subUrl}}/{{subId}}
+Authorization: Bearer {{loginAdmin.response.body.accessToken}}
+
+### Update Subscription (change plan)
+PUT {{subUrl}}/{{subId}}
+Content-Type: application/json
+Authorization: Bearer {{loginAdmin.response.body.accessToken}}
+
+{
+    "planId": {{planId2}}
+}
+
+### Delete Subscription
+DELETE {{subUrl}}/{{subId}}
+Authorization: Bearer {{loginAdmin.response.body.accessToken}}
+
+### Create Subscription as User1 (self)
+# @name createSubUser
+POST {{subUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{loginUser1.response.body.accessToken}}
+
+{
+    "planId": {{planId}}
+}
