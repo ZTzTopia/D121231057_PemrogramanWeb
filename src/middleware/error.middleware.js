@@ -1,6 +1,6 @@
 const AppError = require('../utils/error.utils');
+const { Prisma } = require('../generated/prisma');
 const { ZodError } = require('zod');
-const { Prisma } = require('@prisma/client');
 
 const errorHandler = (err, req, res, next) => {
     let statusCode = err.statusCode || 500;
