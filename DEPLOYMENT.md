@@ -5,8 +5,8 @@ Dokumen ini menjelaskan **langkah lengkap deployment REST API ke AWS EC2** mengg
 ## Informasi Umum
 
 * **Repository GitHub**: <https://github.com/ZTzTopia/D121231057_PemrogramanWeb/tree/saas-subscription-management-api>
-* **Production Base URL**: <http://98.92.248.39:3000/api>
-* **Health Check URL**: `http://98.92.248.39:3000/api/health`
+* **Production Base URL**: <http://44.200.117.194:3000/api>
+* **Health Check URL**: `http://44.200.117.194:3000/api/health`
 
 ## Detail AWS EC2
 
@@ -15,7 +15,7 @@ Dokumen ini menjelaskan **langkah lengkap deployment REST API ke AWS EC2** mengg
 * **OS**: Ubuntu Server 24.04 LTS
 * **Instance ID**: i-0aa12326d93bcedea
 * **Region**: us-east-1f
-* **Public IPv4 Address**: 98.92.248.39
+* **Public IPv4 Address**: 44.200.117.194
 * **Public DNS**: ip-172-31-73-243.ec2.internal
 
 ## Security Group Configuration

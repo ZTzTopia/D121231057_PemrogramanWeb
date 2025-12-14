@@ -52,7 +52,7 @@ Tema aplikasi:
 ## Base URL (Production)
 
 ```text
-http://98.92.248.39:3000/
+http://44.200.117.194:3000/
 ```
 
 ## Test Credentials
